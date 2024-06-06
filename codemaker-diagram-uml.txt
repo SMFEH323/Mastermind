@@ -1,0 +1,43 @@
+@startuml
+
+actor Player
+entity Client 
+entity Server
+
+activate Server
+activate Client
+activate Player
+
+note left Player: Playing as codemaker
+
+Server -> Client: Tell Client to start codemaker turn
+note over Client: Show codemaker display
+Client -> Player: Tell Player to create Code
+note over Player: Create Code
+Player -> Server: Send Code to Server
+note over Server: Make a guess
+Server -> Client: Tell Client to display guess
+note over Client: Display guess
+Client -> Server: 
+note over Server: Check guess
+Server -> Client: Send guess to Client
+note over Client: Display feedback
+loop *number of guesses
+note over Player: Make a guess
+Player -> Server: Send guess
+
+note over Server: Check guess 
+Server -> Client
+note over Client: Show feedback
+Client -> Server: Guesses exhausted or code guessed?
+
+end 
+note over Server: Compute scores
+Server -> Client: Display Scores
+
+
+deactivate Player
+deactivate Server
+deactivate Client
+
+@enduml

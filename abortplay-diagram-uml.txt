@@ -1,0 +1,20 @@
+@startuml
+
+actor Player
+entity Client 
+entity Server
+
+activate Server
+activate Client
+activate Player
+
+note left Player: Abort Play
+Player -> Client: Ask to Abort Play
+note over Client: Close Connection
+
+
+deactivate Player
+deactivate Server
+deactivate Client
+
+@enduml

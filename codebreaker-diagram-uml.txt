@@ -1,0 +1,46 @@
+@startuml
+
+actor Player
+entity Client 
+entity Server
+
+activate Server
+activate Client
+note left Player: Playing as codebreaker
+
+
+
+Player -> Client: Start Play
+activate Player
+
+
+note over Client: Connect to Server
+Client -> Server: Send game options to server
+note over Server: Initialize Game
+group Game executing
+note over Server: Create code 
+Server -> Client: Tell Client to start codebreaker turn
+ 
+Client -> Player: Show codebreaker display
+
+alt if within time limit
+loop *number of guesses
+
+note over Player: Make a guess
+Player -> Server: Send guess
+
+note over Server: Check guess 
+Server -> Client
+note over Client: Show feedback
+Client -> Server: Guesses exhausted or code guessed?
+
+end 
+note over Server: Compute scores
+Server -> Client: Display Scores
+end
+
+deactivate Player
+deactivate Server
+deactivate Client
+
+@enduml

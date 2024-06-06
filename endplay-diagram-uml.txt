@@ -1,0 +1,20 @@
+@startuml
+
+actor Player
+entity Client 
+entity Server
+
+activate Server
+activate Client
+activate Player
+note left Server: End Play
+note over Server: Determine game outcome (winner message)
+Server -> Client: Send Game outcome to Client
+note over Client: Display game outcome
+Client -> Client: Close Connection
+
+deactivate Player
+deactivate Server
+deactivate Client
+
+@enduml
